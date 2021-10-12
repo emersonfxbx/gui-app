@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+    <object class="GtkApplicationWindow" id="app_window">
+        <property name="title">Gui Application</property>
+        <property name="default-width">800</property>
+        <property name="default-height">600</property>
+    </object>
+</interface>
