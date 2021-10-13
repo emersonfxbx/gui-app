@@ -28,7 +28,7 @@ function(gtk4_win_deploy)
         COMMAND ${CMAKE_COMMAND} -E copy "$<TARGET_FILE:${TMP_TARGET}>" "${TMP_DEPLOY_DIR}/bin"
         COMMAND sh -c "for l in `ntldd -R \"$<TARGET_FILE:${TMP_TARGET}>\"|grep -iv \"winsxs\\|system32\\|not found\"|awk '{print \$3}'`;do cp -u \"$l\" \"${TMP_DEPLOY_DIR}/bin\";done"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "$ENV{MINGW_PREFIX}/lib/gdk-pixbuf-2.0" "${TMP_DEPLOY_DIR}/lib/gdk-pixbuf-2.0"
-        COMMAND sh -c "find \"${TMP_DEPLOY_DIR}/lib/gdk-pixbuf-2.0/2.10.0/loaders\" -name *.a -exec rm -f \"{}\" \\;"
+        COMMAND sh -c "find \"${TMP_DEPLOY_DIR}/lib/gdk-pixbuf-2.0/2.10.0/loaders\" -name \"*.a\" -exec rm -f \"{}\" \\;"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "$ENV{MINGW_PREFIX}/share/icons/Adwaita" "${TMP_DEPLOY_DIR}/share/icons/Adwaita"
         COMMAND ${CMAKE_COMMAND} -E copy_directory "$ENV{MINGW_PREFIX}/share/icons/hicolor" "${TMP_DEPLOY_DIR}/share/icons/hicolor")
 endfunction()

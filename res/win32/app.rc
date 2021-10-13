@@ -1,0 +1,58 @@
+#include <winresrc.h>
+#include "version.h"
+
+1 ICON "appicon.ico"
+1 RT_MANIFEST "app.manifest"
+
+// @see https://docs.microsoft.com/en-us/windows/win32/menurc/versioninfo-resource
+
+#define CPP_QUOTE(X) #X
+#define MAKE_VER_PRODUCTVERSION_STR(MAJOR, MINOR) CPP_QUOTE(MAJOR) "." CPP_QUOTE(MINOR) "\0"
+
+#define VER_COMPANYNAME_STR         APP_COMPANY_AUTHOR
+#define VER_FILEDESCRIPTION_STR     APP_DESCRIPTION
+#define VER_LEGALCOPYRIGHT_STR      APP_COPYRIGHT_NOTE
+#define VER_ORIGINALFILENAME_STR    APP_NAME ".exe"
+#define VER_PRODUCTNAME_STR         APP_NAME
+
+#define VER_FILEVERSION             APP_VERSION_MAJOR,APP_VERSION_MINOR,APP_VERSION_PATCH,APP_VERSION_TWEAK
+#define VER_FILEVERSION_STR         APP_VERSION "\0"
+
+#define VER_PRODUCTVERSION          APP_VERSION_MAJOR,APP_VERSION_MINOR,0,0
+#define VER_PRODUCTVERSION_STR      MAKE_VER_PRODUCTVERSION_STR(APP_VERSION_MAJOR, APP_VERSION_MINOR)
+
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     VER_FILEVERSION
+PRODUCTVERSION  VER_PRODUCTVERSION
+FILEFLAGSMASK   VS_FFI_FILEFLAGSMASK
+FILEOS          VOS__WINDOWS32
+FILETYPE        VFT_APP
+FILESUBTYPE     VFT2_UNKNOWN
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName",      VER_COMPANYNAME_STR
+            VALUE "FileDescription",  VER_FILEDESCRIPTION_STR
+            VALUE "FileVersion",      VER_FILEVERSION_STR
+            VALUE "LegalCopyright",   VER_LEGALCOPYRIGHT_STR
+            VALUE "OriginalFilename", VER_ORIGINALFILENAME_STR
+            VALUE "ProductName",      VER_PRODUCTNAME_STR
+            VALUE "ProductVersion",   VER_PRODUCTVERSION_STR
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        /* The following line should only be modified for localized versions.     */
+        /* It consists of any number of WORD,WORD pairs, with each pair           */
+        /* describing a language,codepage combination supported by the file.      */
+        /*                                                                        */
+        /* For example, a file might have values "0x409,1252" indicating that it  */
+        /* supports English language (0x409) in the Windows ANSI codepage (1252). */
+
+        VALUE "Translation", 0x409, 1252
+    END
+END

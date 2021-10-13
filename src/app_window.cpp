@@ -8,5 +8,6 @@ app_window::app_window(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder>
 app_window_ptr app_window::create()
 {
     auto builder = Gtk::Builder::create_from_resource("/ui/app_window.xml");
-    return app_window_ptr(Gtk::Builder::get_widget_derived<app_window>(builder, "app_window"));
+    auto p = Gtk::Builder::get_widget_derived<app_window>(builder, "app_window");
+    return app_window_ptr(p);
 }

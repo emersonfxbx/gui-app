@@ -31,7 +31,16 @@ target_link_libraries(${PROJECT_NAME} PRIVATE PkgConfig::Gtkmm4)
 
 if(WIN32)
     set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE ON)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE
+        "-D_WIN32_WINNT=_WIN32_WINNT_WIN10"
+        "-DUNICODE"
+        "-D_UNICODE")
     target_sources(${PROJECT_NAME} PRIVATE
+        "res/win32/app.rc"
         "src/win32/theme_synchronizer.cpp")
-    gtk4_win_deploy(TARGET ${PROJECT_NAME})
+    if(${CMAKE_BUILD_TYPE} STREQUAL "Release")
+        gtk4_win_deploy(TARGET ${PROJECT_NAME})
+    endif()
+# MSYS2/MINGW windres missing fix
+# ln -s $MINGW_PREFIX/bin/windres.exe $MINGW_PREFIX/bin/x86_64-w64-mingw32-windres.exe
 endif()
